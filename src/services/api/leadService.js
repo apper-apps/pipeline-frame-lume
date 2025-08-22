@@ -155,6 +155,33 @@ async getAllIncludingArchived(includeArchived = false) {
     if (includeArchived) {
       return [...leads];
     }
-    return leads.filter(lead => !lead.archived);
+return leads.filter(lead => !lead.archived);
+  },
+
+  // Clear all leads data (reset to empty state)
+  async clearAll() {
+    await new Promise(resolve => setTimeout(resolve, 300));
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      return true;
+    } catch (error) {
+      console.error("Error clearing localStorage:", error);
+      throw new Error("Failed to clear data");
+    }
+  },
+
+  // Reset to sample data
+  async resetToSampleData() {
+    await new Promise(resolve => setTimeout(resolve, 400));
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      // This will cause getStoredLeads to return the original mock data
+      const sampleData = [...leadsData];
+      saveLeadsToStorage(sampleData);
+      return sampleData;
+    } catch (error) {
+      console.error("Error resetting to sample data:", error);
+      throw new Error("Failed to reset data");
+    }
   }
 };
