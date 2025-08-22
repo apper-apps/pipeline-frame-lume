@@ -195,35 +195,35 @@ const handleActionClick = (action, e) => {
           }}
         />
       )}
-      {/* Lead Name */}
-<h3 className="font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-200 pr-8">
+{/* Lead Name */}
+      <h3 className="font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-200 pr-8 text-lg leading-tight">
         {lead.name}
       </h3>
       
       {/* Contact Info */}
-      <div className="space-y-1 mb-3">
+      <div className="space-y-2 mb-4">
         <div className="flex items-center text-sm text-gray-600">
-          <ApperIcon name="Mail" size={14} className="mr-2 text-gray-400" />
+          <ApperIcon name="Mail" size={14} className="mr-3 text-gray-400 flex-shrink-0" />
           <span className="truncate">{lead.email}</span>
         </div>
         <div className="flex items-center text-sm text-gray-600">
-          <ApperIcon name="Phone" size={14} className="mr-2 text-gray-400" />
+          <ApperIcon name="Phone" size={14} className="mr-3 text-gray-400 flex-shrink-0" />
           <span>{lead.phone}</span>
         </div>
       </div>
 
       {/* Value and Date */}
-      <div className="flex justify-between items-center">
-        <span className="text-xs text-gray-500">
+      <div className="flex justify-between items-center mb-3">
+        <span className="text-sm text-gray-500 font-medium">
           {formatDate(lead.date)}
         </span>
-        <span className="font-bold text-accent bg-gradient-to-r from-accent/10 to-amber-100 px-2 py-1 rounded-md text-sm">
+        <span className="font-bold text-accent bg-gradient-to-r from-accent/15 to-amber-100 px-3 py-1.5 rounded-lg text-sm border border-accent/20">
           {formatCurrency(lead.estimatedValue)}
         </span>
       </div>
 
       {/* Drag Handle */}
-      <div className="flex justify-center mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      <div className="flex justify-center pt-2 border-t border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
         <ApperIcon name="GripVertical" size={16} className="text-gray-400" />
       </div>
     </div>

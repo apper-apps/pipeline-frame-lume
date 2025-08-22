@@ -226,31 +226,33 @@ toast.success('Data has been reset to sample leads');
           </button>
         </div>
       </div>
-      
-      {/* Kanban Board */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-{columns.map((column) => (
-          <KanbanColumn
-            key={column.id}
-            column={column}
-            leads={leads}
-            onEditLead={handleEditLead}
-            onArchiveLead={handleArchiveLead}
-            onDeleteLead={handleDeleteLead}
-            onDuplicateLead={handleDuplicateLead}
-            onFollowUpLead={handleFollowUpLead}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDrop={onDrop}
-            draggedItem={draggedItem}
-            isDragOver={dragOverColumn === column.title}
-          />
-        ))}
+{/* Kanban Board */}
+      <div className="w-full overflow-x-auto">
+        <div className="flex gap-6 pb-4 min-w-max">
+          {columns.map((column) => (
+            <div key={column.id} className="flex-shrink-0 w-80">
+              <KanbanColumn
+                column={column}
+                leads={leads}
+                onEditLead={handleEditLead}
+                onArchiveLead={handleArchiveLead}
+                onDeleteLead={handleDeleteLead}
+                onDuplicateLead={handleDuplicateLead}
+                onFollowUpLead={handleFollowUpLead}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                onDragOver={handleDragOver}
+                onDragEnter={handleDragEnter}
+                onDragLeave={handleDragLeave}
+                onDrop={onDrop}
+                draggedItem={draggedItem}
+                isDragOver={dragOverColumn === column.title}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-<FloatingActionButton onClick={handleAddLead} />
+      <FloatingActionButton onClick={handleAddLead} />
 
       <LeadModal
         isOpen={isModalOpen}
