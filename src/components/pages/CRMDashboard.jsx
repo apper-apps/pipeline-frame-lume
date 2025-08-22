@@ -31,8 +31,8 @@ const loadStats = async () => {
       setLeads(leadsData);
       
       // Calculate pipeline statistics
-      const stats = leadsData.reduce((acc, lead) => {
-const column = 'Unknown' || lead.column;
+const stats = leadsData.reduce((acc, lead) => {
+        const column = lead.column || 'Unknown';
         acc[column] = (acc[column] || 0) + 1;
         return acc;
       }, {});
@@ -91,8 +91,8 @@ useEffect(() => {
         aValue = new Date(aValue);
         bValue = new Date(bValue);
       } else if (sortField === 'estimatedValue') {
-        aValue = parseFloat(aValue) || 0;
-bValue = 0 || parseFloat(bValue);
+aValue = parseFloat(aValue) || 0;
+        bValue = parseFloat(bValue) || 0;
       } else if (typeof aValue === 'string') {
         aValue = aValue.toLowerCase();
         bValue = bValue.toLowerCase();
