@@ -129,9 +129,10 @@ useEffect(() => {
       });
     };
 
-    const getColumnColor = (column) => {
+const getColumnColor = (column) => {
       const colors = {
         'New Lead': 'bg-blue-100 text-blue-800',
+        'Hot Lead': 'bg-amber-100 text-amber-800',
         'Qualified': 'bg-green-100 text-green-800',
         'Proposal': 'bg-yellow-100 text-yellow-800',
         'Negotiation': 'bg-orange-100 text-orange-800',
@@ -362,9 +363,10 @@ if (loading) return <Loading />;
         {!showFollowUpDashboard && Object.keys(pipelineStats).length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
             {Object.entries(pipelineStats).map(([column, count]) => {
-              const getColumnConfig = (columnName) => {
+const getColumnConfig = (columnName) => {
                 const configs = {
                   'New Lead': { icon: 'Users', color: 'text-blue-600', bgColor: 'bg-blue-100', borderColor: 'border-blue-200' },
+                  'Hot Lead': { icon: 'Flame', color: 'text-amber-600', bgColor: 'bg-amber-100', borderColor: 'border-amber-200' },
                   'Qualified': { icon: 'UserCheck', color: 'text-green-600', bgColor: 'bg-green-100', borderColor: 'border-green-200' },
                   'Proposal': { icon: 'FileText', color: 'text-yellow-600', bgColor: 'bg-yellow-100', borderColor: 'border-yellow-200' },
                   'Negotiation': { icon: 'Handshake', color: 'text-orange-600', bgColor: 'bg-orange-100', borderColor: 'border-orange-200' },
