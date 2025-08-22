@@ -1,17 +1,29 @@
-import React, { useState, useEffect } from "react";
-import Header from "@/components/organisms/Header";
-import KanbanBoard from "@/components/organisms/KanbanBoard";
-import Loading from "@/components/ui/Loading";
-import Error from "@/components/ui/Error";
+import React, { useEffect, useState } from "react";
 import { leadService } from "@/services/api/leadService";
+import KanbanBoard from "@/components/organisms/KanbanBoard";
+import Header from "@/components/organisms/Header";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
 
 const CRMDashboard = () => {
-  const [dashboardStats, setDashboardStats] = useState({
-    totalLeads: 0,
-    totalValue: 0
-  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const loadStats = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      
+      // Load leads data to ensure KanbanBoard has access to current stats
+      await leadService.getLeads();
+      
+    } catch (err) {
+      console.error("Failed to load dashboard stats:", err);
+      setError(err.message || "Failed to load dashboard data");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     loadStats();
@@ -31,37 +43,13 @@ const CRMDashboard = () => {
       window.removeEventListener("leadsUpdated", handleStorageChange);
     };
   }, []);
-
-  const loadStats = async () => {
-    try {
-      setError("");
-      const leads = await leadService.getAll();
-      
-      const totalLeads = leads.length;
-      const totalValue = leads.reduce((sum, lead) => sum + (lead.estimatedValue || 0), 0);
-      
-      setDashboardStats({
-        totalLeads,
-        totalValue
-      });
-    } catch (err) {
-      setError("Failed to load dashboard data");
-      console.error("Error loading stats:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   if (loading) return <Loading />;
   if (error) return <Error error={error} onRetry={loadStats} />;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <Header 
-          totalLeads={dashboardStats.totalLeads}
-          totalValue={dashboardStats.totalValue}
-        />
+<Header />
         <KanbanBoard />
       </div>
     </div>

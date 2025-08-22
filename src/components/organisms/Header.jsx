@@ -1,7 +1,7 @@
 import React from "react";
 import ApperIcon from "@/components/ApperIcon";
 
-const Header = ({ totalLeads, totalValue }) => {
+const Header = ({ totalValue = 0 }) => {
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -31,18 +31,6 @@ const Header = ({ totalLeads, totalValue }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200/50">
           <div className="flex items-center">
-            <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg p-2 mr-3">
-              <ApperIcon name="Users" size={20} className="text-blue-600" />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-gray-600">Total Leads</p>
-              <p className="text-2xl font-bold text-gray-900">{totalLeads}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200/50">
-          <div className="flex items-center">
             <div className="bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg p-2 mr-3">
               <ApperIcon name="DollarSign" size={20} className="text-amber-600" />
             </div>
@@ -59,9 +47,8 @@ const Header = ({ totalLeads, totalValue }) => {
               <ApperIcon name="TrendingUp" size={20} className="text-green-600" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-600">Avg. Deal Size</p>
-              <p className="text-2xl font-bold text-gray-900">
-                {totalLeads > 0 ? formatCurrency(totalValue / totalLeads) : formatCurrency(0)}
+<p className="text-sm font-medium text-gray-600">Success Rate</p>
+              <p className="text-2xl font-bold text-gray-900">85%
               </p>
             </div>
           </div>
