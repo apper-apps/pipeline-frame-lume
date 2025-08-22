@@ -3,7 +3,7 @@ import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
 
-const AddLeadButton = ({ onClick, className, ...props }) => {
+const FloatingActionButton = ({ onClick, className, ...props }) => {
   return (
     <Button
       onClick={onClick}
@@ -12,8 +12,6 @@ const AddLeadButton = ({ onClick, className, ...props }) => {
         "fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 z-40",
         className
       )}
-      aria-label="Add new lead"
-      title="Add new lead"
       {...props}
     >
       <ApperIcon name="Plus" size={24} />
@@ -21,4 +19,4 @@ const AddLeadButton = ({ onClick, className, ...props }) => {
   );
 };
 
-export default AddLeadButton;
+export default FloatingActionButton;

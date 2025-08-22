@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import KanbanColumn from "@/components/organisms/KanbanColumn";
 import LeadModal from "@/components/organisms/LeadModal";
-import FloatingActionButton from "@/components/molecules/FloatingActionButton";
+import AddLeadButton from "@/components/molecules/AddLeadButton";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import { leadService } from "@/services/api/leadService";
@@ -158,7 +158,7 @@ const onDrop = (e, columnTitle) => {
         ))}
       </div>
 
-      <FloatingActionButton onClick={handleAddLead} />
+<AddLeadButton onClick={handleAddLead} />
 
       <LeadModal
         isOpen={isModalOpen}
