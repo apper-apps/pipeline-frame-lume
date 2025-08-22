@@ -151,7 +151,7 @@ const FollowUpModal = ({
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
+className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -172,28 +172,28 @@ const FollowUpModal = ({
                 </button>
               </div>
               {lead && (
-                <p className="text-blue-100 mt-2 text-sm">
+<p className="text-blue-100 mt-1 text-sm">
                   For: <span className="font-semibold">{lead.name}</span>
                 </p>
               )}
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div className="space-y-2">
+<form onSubmit={handleSubmit} className="p-6 space-y-6">
+              <div className="space-y-3">
                 <label className="block text-sm font-semibold text-gray-700">
                   Reminder Type <span className="text-red-500">*</span>
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {reminderTypes.map((type) => (
                     <button
                       key={type.value}
                       type="button"
                       onClick={() => setFormData(prev => ({ ...prev, type: type.value }))}
                       className={cn(
-                        "flex items-center gap-2 p-3 rounded-lg border-2 transition-all duration-200",
+                        "flex items-center gap-2 p-3 rounded-xl border-2 transition-all duration-200 hover:shadow-sm",
                         formData.type === type.value
-                          ? "border-primary bg-primary/5 text-primary"
+                          ? "border-primary bg-primary/10 text-primary shadow-sm"
                           : "border-gray-200 hover:border-gray-300"
                       )}
                     >
@@ -215,7 +215,7 @@ const FollowUpModal = ({
                 placeholder="Enter reminder title"
               />
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <FormField
                   label="Date"
                   id="reminderDate"
@@ -237,24 +237,24 @@ const FollowUpModal = ({
                   error={errors.reminderTime}
                   required
                 />
-              </div>
 
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-700">
-                  Priority
-                </label>
-                <select
-                  name="priority"
-                  value={formData.priority}
-                  onChange={handleInputChange}
-                  className="w-full h-12 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-200"
-                >
-                  {priorityLevels.map((level) => (
-                    <option key={level.value} value={level.value}>
-                      {level.label}
-                    </option>
-                  ))}
-                </select>
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-gray-700">
+                    Priority
+                  </label>
+                  <select
+                    name="priority"
+                    value={formData.priority}
+                    onChange={handleInputChange}
+                    className="w-full h-12 rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                  >
+                    {priorityLevels.map((level) => (
+                      <option key={level.value} value={level.value}>
+                        {level.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -266,11 +266,10 @@ const FollowUpModal = ({
                   value={formData.notes}
                   onChange={handleInputChange}
                   placeholder="Add any additional notes..."
-                  rows={3}
+                  rows={4}
                   className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all duration-200 resize-none"
                 />
               </div>
-
               {/* Actions */}
               <div className="flex gap-3 pt-4">
                 <Button

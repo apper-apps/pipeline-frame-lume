@@ -323,32 +323,34 @@ if (loading) return <Loading />;
 
 return (
     <div
-    className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-2 md:p-4">
-    <div className="max-w-full mx-auto">
-        <div
-            className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 gap-4">
-            <div
-                className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 gap-4">
-                <Header />
-                <div className="flex items-center gap-2 flex-wrap">
-                    <Button
-                        variant={showFollowUpDashboard ? "secondary" : "primary"}
-                        onClick={() => setShowFollowUpDashboard(false)}
-                        className="text-sm">
-                        <ApperIcon name="LayoutGrid" size={14} className="mr-1" />Pipeline
-                                    </Button>
-                    <Button
-                        variant={showFollowUpDashboard ? "primary" : "secondary"}
-                        onClick={() => setShowFollowUpDashboard(true)}
-                        className="text-sm">
-                        <ApperIcon name="Clock" size={14} className="mr-1" />Follow-ups
-                                    </Button>
-                    <LogoutButton />
-                </div>
+className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
+    <div className="max-w-full mx-auto space-y-6">
+        {/* Header Section */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-white/60 backdrop-blur-sm rounded-2xl p-6 border border-white/40 shadow-lg">
+            <Header />
+            <div className="flex items-center gap-3 flex-wrap">
+                <Button
+                    variant={showFollowUpDashboard ? "secondary" : "primary"}
+                    onClick={() => setShowFollowUpDashboard(false)}
+                    className="text-sm font-medium">
+                    <ApperIcon name="LayoutGrid" size={16} className="mr-2" />
+                    Pipeline
+                </Button>
+                <Button
+                    variant={showFollowUpDashboard ? "primary" : "secondary"}
+                    onClick={() => setShowFollowUpDashboard(true)}
+                    className="text-sm font-medium">
+                    <ApperIcon name="Clock" size={16} className="mr-2" />
+                    Follow-ups
+                </Button>
+                <div className="w-px h-6 bg-gray-300 mx-1"></div>
+                <LogoutButton />
             </div>
-            {/* Pipeline Stats */}
-            {!showFollowUpDashboard && Object.keys(pipelineStats).length > 0 && <div
-                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 mb-4">
+        </div>
+
+        {/* Pipeline Stats */}
+        {!showFollowUpDashboard && Object.keys(pipelineStats).length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
                 {Object.entries(pipelineStats).map(([column, count]) => {
                     const getColumnConfig = columnName => {
                         const configs = {
@@ -358,49 +360,42 @@ return (
                                 bgColor: "bg-blue-100",
                                 borderColor: "border-blue-200"
                             },
-
                             "Hot Lead": {
                                 icon: "Flame",
                                 color: "text-amber-600",
                                 bgColor: "bg-amber-100",
                                 borderColor: "border-amber-200"
                             },
-
                             "Call Scheduled": {
                                 icon: "Phone",
                                 color: "text-purple-600",
                                 bgColor: "bg-purple-100",
                                 borderColor: "border-purple-200"
                             },
-
                             "Qualified": {
                                 icon: "UserCheck",
                                 color: "text-green-600",
                                 bgColor: "bg-green-100",
                                 borderColor: "border-green-200"
                             },
-
                             "Proposal": {
                                 icon: "FileText",
                                 color: "text-yellow-600",
                                 bgColor: "bg-yellow-100",
                                 borderColor: "border-yellow-200"
                             },
-
                             "Negotiation": {
                                 icon: "Handshake",
                                 color: "text-orange-600",
                                 bgColor: "bg-orange-100",
                                 borderColor: "border-orange-200"
                             },
-
                             "Closed Won": {
                                 icon: "Trophy",
                                 color: "text-emerald-600",
                                 bgColor: "bg-emerald-100",
                                 borderColor: "border-emerald-200"
                             },
-
                             "Closed Lost": {
                                 icon: "XCircle",
                                 color: "text-red-600",
@@ -422,23 +417,28 @@ return (
                     return (
                         <div
                             key={column}
-                            className={`bg-white rounded-lg p-3 border ${config.borderColor} shadow-sm`}>
+                            className={`bg-white/90 backdrop-blur-sm rounded-xl p-4 border ${config.borderColor} shadow-sm hover:shadow-md transition-all duration-200`}>
                             <div className="flex items-center">
-                                <div className={`${config.bgColor} rounded-lg p-2 mr-2`}>
-                                    <ApperIcon name={config.icon} size={16} className={config.color} />
+                                <div className={`${config.bgColor} rounded-lg p-2.5 mr-3`}>
+                                    <ApperIcon name={config.icon} size={18} className={config.color} />
                                 </div>
                                 <div>
-                                    <p className="text-xs font-medium text-gray-600 truncate">{column}</p>
+                                    <p className="text-xs font-semibold text-gray-600 truncate mb-1">{column}</p>
                                     <p className={`text-xl font-bold ${config.color}`}>{count}</p>
                                 </div>
                             </div>
                         </div>
                     );
                 })}
-            </div>}
+            </div>
+        )}
+
+        {/* Main Content */}
+        <div>
             {showFollowUpDashboard ? <FollowUpDashboard /> : showTableView ? <LeadsTableView /> : <KanbanBoard />}
         </div>
-    </div></div>
+    </div>
+</div>
   );
 };
 

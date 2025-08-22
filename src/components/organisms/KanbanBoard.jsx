@@ -170,15 +170,15 @@ const handleSaveFollowUp = async (reminderData) => {
   if (error) return <Error message={error} onRetry={loadData} />;
 
   return (
-    <div className="space-y-6">
-      {/* Action Buttons Row */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+<div className="space-y-8">
+      {/* Action Section */}
+      <div className="flex items-center justify-between">
         <AddLeadButton onClick={handleAddLead} />
-        
       </div>
-{/* Kanban Board */}
+
+      {/* Kanban Board */}
       <div className="w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
           {columns.map((column) => (
             <div key={column.id} className="min-w-0">
               <KanbanColumn
@@ -202,6 +202,7 @@ const handleSaveFollowUp = async (reminderData) => {
           ))}
         </div>
       </div>
+
       <FloatingActionButton onClick={handleAddLead} />
 
       <LeadModal
@@ -211,7 +212,8 @@ const handleSaveFollowUp = async (reminderData) => {
         lead={editingLead}
         columns={columns}
       />
-{/* Follow Up Modal */}
+
+      {/* Follow Up Modal */}
       <FollowUpModal
         isOpen={isFollowUpModalOpen}
         onClose={() => {

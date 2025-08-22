@@ -150,84 +150,85 @@ return (
       )}
 
 {/* Main Content */}
-      <div className="p-3">
+      <div className="p-4">
         {/* Header Row */}
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 text-lg mb-1 break-words">{lead.name}</h3>
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex-1 min-w-0">
+            <h3 className="font-semibold text-gray-900 text-lg mb-1 break-words leading-tight">{lead.name}</h3>
           </div>
           
-          {/* Actions */}
-          <div className="flex items-center gap-1 ml-4">
+          {/* Quick Actions */}
+          <div className="flex items-center gap-1 ml-3 flex-shrink-0">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onFollowUp(lead);
               }}
-              className="p-1 text-gray-400 hover:text-blue-600 rounded"
+              className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-md transition-colors"
               title="Follow up"
             >
-              <ApperIcon name="Clock" size={16} />
+              <ApperIcon name="Clock" size={14} />
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onDuplicate(lead);
               }}
-              className="p-1 text-gray-400 hover:text-purple-600 rounded"
+              className="p-1.5 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-md transition-colors"
               title="Duplicate"
             >
-              <ApperIcon name="Copy" size={16} />
+              <ApperIcon name="Copy" size={14} />
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setShowArchiveConfirm(true);
               }}
-              className="p-1 text-gray-400 hover:text-amber-600 rounded"
+              className="p-1.5 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-md transition-colors"
               title="Archive"
             >
-              <ApperIcon name="Archive" size={16} />
+              <ApperIcon name="Archive" size={14} />
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setShowDeleteConfirm(true);
               }}
-              className="p-1 text-gray-400 hover:text-red-600 rounded"
+              className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
               title="Delete"
             >
-              <ApperIcon name="Trash2" size={16} />
+              <ApperIcon name="Trash2" size={14} />
             </button>
             <div className="w-px h-4 bg-gray-200 mx-1"></div>
-            <div className="p-1 text-gray-400">
-              <ApperIcon name="GripVertical" size={16} />
+            <div className="p-1.5 text-gray-400 cursor-grab">
+              <ApperIcon name="GripVertical" size={14} />
             </div>
           </div>
         </div>
 
-{/* Text Content Frame */}
-        <div className="border border-gray-100 rounded-lg p-2 bg-gray-50/50">
-          {/* Contact Row */}
-<div className="space-y-2 mb-2 text-sm text-gray-600">
-            <div className="flex items-center gap-2">
-              <ApperIcon name="Mail" size={14} />
-              <span className="break-words whitespace-pre-wrap truncate">{lead.email}</span>
+        {/* Content Frame */}
+        <div className="border border-gray-200 rounded-lg p-3 bg-gradient-to-br from-gray-50/80 to-white">
+          {/* Contact Information */}
+          <div className="space-y-2.5 mb-3 text-sm">
+            <div className="flex items-center gap-2.5 text-gray-600">
+              <ApperIcon name="Mail" size={14} className="text-gray-400 flex-shrink-0" />
+              <span className="break-words truncate">{lead.email}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <ApperIcon name="Phone" size={14} />
-              <span className="break-words whitespace-pre-wrap">{lead.phone}</span>
+            <div className="flex items-center gap-2.5 text-gray-600">
+              <ApperIcon name="Phone" size={14} className="text-gray-400 flex-shrink-0" />
+              <span className="break-words">{lead.phone}</span>
             </div>
           </div>
-          {/* Value and Date Row */}
-          <div className="flex items-center justify-between text-sm">
-            <div>
-              <span className="text-gray-500">Value: </span>
+          
+          {/* Value and Date */}
+          <div className="flex items-center justify-between text-sm pt-2 border-t border-gray-150">
+            <div className="flex items-center gap-1">
+              <span className="text-gray-500">Value:</span>
               <span className="font-semibold text-green-600">
                 {formatCurrency(lead.estimatedValue)}
               </span>
             </div>
-            <div className="text-gray-500">
+            <div className="text-gray-500 font-medium">
               {formatDate(lead.date)}
             </div>
           </div>
