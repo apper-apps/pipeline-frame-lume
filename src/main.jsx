@@ -1,35 +1,15 @@
-import "./index.css";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "@/App";
-import { useAuth } from "@/contexts/AuthContext";
-import ApperIcon from "@/components/ApperIcon";
-import Button from "@/components/atoms/Button";
+import './index.css'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
+import App from '@/App'
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+// Initialize the application
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+// Render the app
+root.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>
-);
-
-// Logout Button Component
-const LogoutButton = () => {
-  const { logout, user } = useAuth();
-  
-  const handleLogout = () => {
-    logout();
-  };
-
-  return (
-    <Button
-      variant="secondary"
-      onClick={handleLogout}
-      className="ml-2"
-      title={`Signed in as ${user?.name || user?.email}`}
-    >
-      <ApperIcon name="LogOut" size={16} className="mr-2" />
-      Logout
-    </Button>
-  );
-};
+)
