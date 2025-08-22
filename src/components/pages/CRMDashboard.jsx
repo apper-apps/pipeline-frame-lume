@@ -264,8 +264,8 @@ const getColumnColor = (column) => {
                         <td className="px-6 py-4">
                             <div className="flex items-center justify-center gap-1">
                                 <button
-                                    onClick={() => {
-                                        const event = new window.CustomEvent || Event("editLead", {
+onClick={() => {
+                                        const event = new (window.CustomEvent || Event)("editLead", {
                                             detail: lead,
                                             bubbles: true
                                         });
@@ -277,8 +277,8 @@ const getColumnColor = (column) => {
                                     <ApperIcon name="Edit2" size={16} />
                                 </button>
                                 <button
-                                    onClick={() => {
-                                        const event = new window.CustomEvent || Event("followUpLead", {
+onClick={() => {
+                                        const event = new (window.CustomEvent || Event)("followUpLead", {
                                             detail: lead,
                                             bubbles: true
                                         });
@@ -290,8 +290,8 @@ const getColumnColor = (column) => {
                                     <ApperIcon name="Clock" size={16} />
                                 </button>
                                 <button
-                                    onClick={() => {
-                                        const event = new window.CustomEvent || Event("duplicateLead", {
+onClick={() => {
+                                        const event = new (window.CustomEvent || Event)("duplicateLead", {
                                             detail: lead,
                                             bubbles: true
                                         });
