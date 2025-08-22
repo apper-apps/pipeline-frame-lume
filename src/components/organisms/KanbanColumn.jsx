@@ -25,10 +25,10 @@ const KanbanColumn = ({
   const columnLeads = leads.filter(lead => lead.column === column.title);
 
   return (
-    <div
+<div
 className={cn(
-        "bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/60 shadow-lg shadow-slate-200/50 transition-all duration-300 min-h-[600px] hover:shadow-xl hover:shadow-slate-200/60",
-        isDragOver && "drag-over border-2 border-primary bg-gradient-to-br from-blue-50/90 to-indigo-50/90 transform scale-[1.02]",
+        "bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-slate-200/60 shadow-md transition-all duration-300 min-h-[500px] hover:shadow-lg",
+        isDragOver && "drag-over border-2 border-primary bg-gradient-to-br from-blue-50/90 to-indigo-50/90 transform scale-[1.01]",
         className
       )}
       onDragOver={onDragOver}
@@ -57,24 +57,24 @@ className={cn(
               isDragging={draggedItem?.Id === lead.Id || draggedItem?.id === lead.id}
             />
           ))
-) : (
-          <div className="flex items-center justify-center min-h-[280px]">
-            <div className="text-center p-8 max-w-sm">
-              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+        ) : (
+          <div className="flex items-center justify-center min-h-[200px]">
+            <div className="text-center p-4">
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
                 <div className="text-gray-300">
-                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </div>
               </div>
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">No leads in {column.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed mb-4">
-                Start by adding new leads or drag existing ones here to organize your pipeline effectively.
+              <h3 className="text-base font-semibold text-gray-700 mb-2">No leads in {column.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed mb-3">
+                Start by adding new leads or drag existing ones here.
               </p>
               <div className="flex items-center justify-center gap-2 text-xs text-gray-400">
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>
                 <span>Drag & Drop Ready</span>
-                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-gray-300 rounded-full"></div>
               </div>
             </div>
           </div>

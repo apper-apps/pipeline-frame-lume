@@ -150,7 +150,7 @@ return (
       )}
 
 {/* Main Content */}
-      <div className="p-4">
+      <div className="p-3">
         {/* Header Row */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1">
@@ -206,20 +206,19 @@ return (
           </div>
         </div>
 
-        {/* Text Content Frame */}
-        <div className="border border-gray-100 rounded-lg p-3 bg-gray-50/50">
+{/* Text Content Frame */}
+        <div className="border border-gray-100 rounded-lg p-2 bg-gray-50/50">
           {/* Contact Row */}
-          <div className="flex items-center gap-4 mb-3 text-sm text-gray-600">
+<div className="space-y-2 mb-2 text-sm text-gray-600">
             <div className="flex items-center gap-2">
               <ApperIcon name="Mail" size={14} />
-              <span className="break-words whitespace-pre-wrap">{lead.email}</span>
+              <span className="break-words whitespace-pre-wrap truncate">{lead.email}</span>
             </div>
             <div className="flex items-center gap-2">
               <ApperIcon name="Phone" size={14} />
               <span className="break-words whitespace-pre-wrap">{lead.phone}</span>
             </div>
           </div>
-
           {/* Value and Date Row */}
           <div className="flex items-center justify-between text-sm">
             <div>

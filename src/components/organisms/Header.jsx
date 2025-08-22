@@ -11,9 +11,9 @@ const Header = ({ totalValue = 0 }) => {
     }).format(amount);
   };
 
-  return (
-    <div className="mb-8">
-      <div className="flex items-center mb-4">
+return (
+    <div className="mb-4">
+      <div className="flex items-center mb-3">
         <div className="bg-gradient-to-br from-primary to-blue-600 rounded-xl p-3 mr-4">
           <ApperIcon name="Users" size={28} className="text-white" />
         </div>
@@ -27,9 +27,9 @@ const Header = ({ totalValue = 0 }) => {
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200/50">
+{/* Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 border border-slate-200/50">
           <div className="flex items-center">
             <div className="bg-gradient-to-br from-amber-100 to-amber-200 rounded-lg p-2 mr-3">
               <ApperIcon name="DollarSign" size={20} className="text-amber-600" />
@@ -41,7 +41,7 @@ const Header = ({ totalValue = 0 }) => {
           </div>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200/50">
+<div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 border border-slate-200/50">
           <div className="flex items-center">
             <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-lg p-2 mr-3">
               <ApperIcon name="TrendingUp" size={20} className="text-green-600" />
@@ -54,7 +54,7 @@ const Header = ({ totalValue = 0 }) => {
           </div>
         </div>
 
-        <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-slate-200/50">
+<div className="bg-white/60 backdrop-blur-sm rounded-lg p-3 border border-slate-200/50">
           <div className="flex items-center">
             <div className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg p-2 mr-3">
               <ApperIcon name="Target" size={20} className="text-purple-600" />

@@ -177,10 +177,10 @@ const handleSaveFollowUp = async (reminderData) => {
         
       </div>
 {/* Kanban Board */}
-      <div className="w-full overflow-x-auto">
-        <div className="flex gap-6 pb-4 min-w-max">
+      <div className="w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
           {columns.map((column) => (
-            <div key={column.id} className="flex-shrink-0 w-80">
+            <div key={column.id} className="min-w-0">
               <KanbanColumn
                 column={column}
                 leads={leads}
