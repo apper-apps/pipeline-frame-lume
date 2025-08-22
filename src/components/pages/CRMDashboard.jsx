@@ -108,7 +108,7 @@ useEffect(() => {
     return filteredLeads;
   };
 
-  const LeadsTableView = () => {
+const LeadsTableView = () => {
     const filteredLeads = getFilteredAndSortedLeads();
     const columns = ['New Lead', 'Qualified', 'Proposal', 'Negotiation', 'Closed Won', 'Closed Lost'];
     
@@ -133,6 +133,7 @@ const getColumnColor = (column) => {
       const colors = {
         'New Lead': 'bg-blue-100 text-blue-800',
         'Hot Lead': 'bg-amber-100 text-amber-800',
+        'Call Scheduled': 'bg-purple-100 text-purple-800',
         'Qualified': 'bg-green-100 text-green-800',
         'Proposal': 'bg-yellow-100 text-yellow-800',
         'Negotiation': 'bg-orange-100 text-orange-800',
@@ -367,6 +368,7 @@ const getColumnConfig = (columnName) => {
                 const configs = {
                   'New Lead': { icon: 'Users', color: 'text-blue-600', bgColor: 'bg-blue-100', borderColor: 'border-blue-200' },
                   'Hot Lead': { icon: 'Flame', color: 'text-amber-600', bgColor: 'bg-amber-100', borderColor: 'border-amber-200' },
+                  'Call Scheduled': { icon: 'Phone', color: 'text-purple-600', bgColor: 'bg-purple-100', borderColor: 'border-purple-200' },
                   'Qualified': { icon: 'UserCheck', color: 'text-green-600', bgColor: 'bg-green-100', borderColor: 'border-green-200' },
                   'Proposal': { icon: 'FileText', color: 'text-yellow-600', bgColor: 'bg-yellow-100', borderColor: 'border-yellow-200' },
                   'Negotiation': { icon: 'Handshake', color: 'text-orange-600', bgColor: 'bg-orange-100', borderColor: 'border-orange-200' },
