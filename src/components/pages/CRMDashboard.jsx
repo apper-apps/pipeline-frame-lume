@@ -9,13 +9,13 @@ const CRMDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const loadStats = async () => {
+const loadStats = async () => {
     try {
       setLoading(true);
       setError("");
       
       // Load leads data to ensure KanbanBoard has access to current stats
-      await leadService.getLeads();
+      await leadService.getAll();
       
     } catch (err) {
       console.error("Failed to load dashboard stats:", err);
