@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { leadService } from "@/services/api/leadService";
 import { columnService } from "@/services/api/columnService";
+import { reminderService } from "@/services/api/reminderService";
 import { useDragAndDrop } from "@/hooks/useDragAndDrop";
+import FollowUpModal from "@/components/organisms/FollowUpModal";
 import KanbanColumn from "@/components/organisms/KanbanColumn";
 import LeadModal from "@/components/organisms/LeadModal";
 import Error from "@/components/ui/Error";
@@ -10,13 +12,14 @@ import Loading from "@/components/ui/Loading";
 import AddLeadButton from "@/components/molecules/AddLeadButton";
 import FloatingActionButton from "@/components/molecules/FloatingActionButton";
 const KanbanBoard = () => {
-  const [leads, setLeads] = useState([]);
+const [leads, setLeads] = useState([]);
   const [columns, setColumns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingLead, setEditingLead] = useState(null);
-
+  const [isFollowUpModalOpen, setIsFollowUpModalOpen] = useState(false);
+  const [followUpLead, setFollowUpLead] = useState(null);
   const {
     draggedItem,
     dragOverColumn,
@@ -132,6 +135,27 @@ const handleDuplicateLead = async (lead) => {
       console.error('Error duplicating lead:', error);
     }
   };
+const handleFollowUpLead = (lead) => {
+    setFollowUpLead(lead);
+    setIsFollowUpModalOpen(true);
+  };
+
+  const handleSaveFollowUp = async (reminderData) => {
+    try {
+      await reminderService.create(reminderData);
+      toast.success(`Follow-up reminder set for ${reminderData.leadName}`, {
+        position: "top-right"
+      });
+      setIsFollowUpModalOpen(false);
+      setFollowUpLead(null);
+    } catch (error) {
+      console.error("Error saving follow-up reminder:", error);
+      toast.error("Failed to set follow-up reminder", {
+        position: "top-right"
+      });
+    }
+  };
+
   const handleClearData = async () => {
     const confirmed = window.confirm(
       'Are you sure you want to clear all leads? This action cannot be undone.'
@@ -143,10 +167,10 @@ const handleDuplicateLead = async (lead) => {
       setLoading(true);
       await leadService.clearAll();
       setLeads([]);
-      toast.success('All leads have been cleared successfully');
+toast.success('All leads have been cleared successfully');
       
       // Dispatch custom event to update dashboard stats
-      window.dispatchEvent(new CustomEvent('leadsUpdated'));
+      window.dispatchEvent(new window.CustomEvent('leadsUpdated'));
     } catch (error) {
       toast.error('Failed to clear leads');
       console.error('Error clearing data:', error);
@@ -166,10 +190,10 @@ const handleDuplicateLead = async (lead) => {
       setLoading(true);
       const sampleData = await leadService.resetToSampleData();
       setLeads(sampleData);
-      toast.success('Data has been reset to sample leads');
+toast.success('Data has been reset to sample leads');
       
       // Dispatch custom event to update dashboard stats
-      window.dispatchEvent(new CustomEvent('leadsUpdated'));
+      window.dispatchEvent(new window.CustomEvent('leadsUpdated'));
     } catch (error) {
       toast.error('Failed to reset to sample data');
       console.error('Error resetting data:', error);
@@ -205,7 +229,7 @@ const handleDuplicateLead = async (lead) => {
       
       {/* Kanban Board */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {columns.map((column) => (
+{columns.map((column) => (
           <KanbanColumn
             key={column.id}
             column={column}
@@ -214,6 +238,7 @@ const handleDuplicateLead = async (lead) => {
             onArchiveLead={handleArchiveLead}
             onDeleteLead={handleDeleteLead}
             onDuplicateLead={handleDuplicateLead}
+            onFollowUpLead={handleFollowUpLead}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onDragOver={handleDragOver}
@@ -233,6 +258,16 @@ const handleDuplicateLead = async (lead) => {
         onSave={handleSaveLead}
         lead={editingLead}
         columns={columns}
+      />
+{/* Follow Up Modal */}
+      <FollowUpModal
+        isOpen={isFollowUpModalOpen}
+        onClose={() => {
+          setIsFollowUpModalOpen(false);
+          setFollowUpLead(null);
+        }}
+        onSave={handleSaveFollowUp}
+        lead={followUpLead}
       />
     </div>
   );

@@ -11,6 +11,7 @@ const KanbanColumn = ({
   onArchiveLead,
   onDeleteLead,
   onDuplicateLead,
+  onFollowUpLead,
   onDragStart,
   onDragEnd,
   onDragOver,
@@ -47,10 +48,11 @@ const KanbanColumn = ({
             <LeadCard
               key={lead.Id || lead.id || `lead-${Math.random()}`}
               lead={lead}
-              onEdit={() => onEditLead(lead)}
+onEdit={() => onEditLead(lead)}
               onArchive={onArchiveLead}
               onDelete={onDeleteLead}
               onDuplicate={onDuplicateLead}
+              onFollowUp={onFollowUpLead}
               onDragStart={(e) => onDragStart(e, lead)}
               onDragEnd={onDragEnd}
               isDragging={draggedItem?.Id === lead.Id || draggedItem?.id === lead.id}

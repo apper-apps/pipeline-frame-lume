@@ -4,11 +4,12 @@ import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
 
 const LeadCard = ({ 
-  lead, 
+lead, 
   onEdit,
   onArchive,
   onDelete,
   onDuplicate,
+  onFollowUp,
   onDragStart,
   onDragEnd,
   isDragging = false,
@@ -38,8 +39,7 @@ const handleDropdownClick = (e) => {
     e.stopPropagation();
     setShowDropdown(!showDropdown);
   };
-
-  const handleActionClick = (action, e) => {
+const handleActionClick = (action, e) => {
     e.stopPropagation();
     setShowDropdown(false);
     
@@ -49,6 +49,8 @@ const handleDropdownClick = (e) => {
       setShowArchiveConfirm(true);
     } else if (action === 'duplicate') {
       onDuplicate(lead);
+    } else if (action === 'followup') {
+      onFollowUp(lead);
     }
   };
 
@@ -91,8 +93,15 @@ const handleDropdownClick = (e) => {
           <ApperIcon name="MoreVertical" size={16} />
         </button>
         
-        {showDropdown && (
-          <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-lg shadow-lg py-1 min-w-[120px] z-20">
+{showDropdown && (
+          <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-lg shadow-lg py-1 min-w-[140px] z-20">
+            <button
+              onClick={(e) => handleActionClick('followup', e)}
+              className="w-full px-3 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2 text-blue-600"
+            >
+              <ApperIcon name="Clock" size={14} />
+              Follow Up
+            </button>
             <button
               onClick={(e) => handleActionClick('duplicate', e)}
               className="w-full px-3 py-2 text-left text-sm hover:bg-gray-50 flex items-center gap-2"
