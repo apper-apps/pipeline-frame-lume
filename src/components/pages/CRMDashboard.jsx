@@ -10,16 +10,27 @@ import Loading from "@/components/ui/Loading";
 import Button from "@/components/atoms/Button";
 import LogoutButton from "@/components/molecules/LogoutButton";
 const CRMDashboard = () => {
-  const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showFollowUpDashboard, setShowFollowUpDashboard] = useState(false);
+  const [pipelineStats, setPipelineStats] = useState({});
+
 const loadStats = async () => {
     try {
       setLoading(true);
       setError("");
       
-      // Load leads data to ensure KanbanBoard has access to current stats
-      await leadService.getAll();
+      // Load leads data to calculate pipeline stats
+      const leads = await leadService.getAll();
+      
+      // Calculate pipeline statistics
+      const stats = leads.reduce((acc, lead) => {
+        const column = lead.column || 'Unknown';
+        acc[column] = (acc[column] || 0) + 1;
+        return acc;
+      }, {});
+      
+      setPipelineStats(stats);
       
     } catch (err) {
       console.error("Failed to load dashboard stats:", err);
@@ -59,7 +70,7 @@ if (error) return <Error error={error} onRetry={loadStats} />;
             <Button
               variant={showFollowUpDashboard ? "secondary" : "primary"}
               onClick={() => setShowFollowUpDashboard(false)}
-            >
+>
               <ApperIcon name="LayoutGrid" size={16} className="mr-2" />
               Pipeline
             </Button>
@@ -73,6 +84,39 @@ if (error) return <Error error={error} onRetry={loadStats} />;
             <LogoutButton />
           </div>
         </div>
+        
+        {/* Pipeline Stats */}
+        {!showFollowUpDashboard && Object.keys(pipelineStats).length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            {Object.entries(pipelineStats).map(([column, count]) => {
+              const getColumnConfig = (columnName) => {
+                const configs = {
+                  'Cold Lead': { icon: 'Snowflake', color: 'text-blue-600', bgColor: 'bg-blue-100', borderColor: 'border-blue-200' },
+                  'Hot Lead': { icon: 'Flame', color: 'text-red-600', bgColor: 'bg-red-100', borderColor: 'border-red-200' },
+                  'Estimate Sent': { icon: 'FileText', color: 'text-yellow-600', bgColor: 'bg-yellow-100', borderColor: 'border-yellow-200' },
+                  'Closed': { icon: 'CheckCircle', color: 'text-green-600', bgColor: 'bg-green-100', borderColor: 'border-green-200' }
+                };
+                return configs[columnName] || { icon: 'Circle', color: 'text-gray-600', bgColor: 'bg-gray-100', borderColor: 'border-gray-200' };
+              };
+
+              const config = getColumnConfig(column);
+
+              return (
+                <div key={column} className={`bg-white rounded-xl p-4 border ${config.borderColor} shadow-sm`}>
+                  <div className="flex items-center">
+                    <div className={`${config.bgColor} rounded-lg p-2 mr-3`}>
+                      <ApperIcon name={config.icon} size={20} className={config.color} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-gray-600">{column}</p>
+                      <p className={`text-2xl font-bold ${config.color}`}>{count}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
         
         {showFollowUpDashboard ? (
           <FollowUpDashboard />
