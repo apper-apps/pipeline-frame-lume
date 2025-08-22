@@ -97,8 +97,64 @@ export const leadService = {
     return true;
   },
 
-  // Update lead column (for drag and drop)
+// Update lead column (for drag and drop)
   async updateColumn(id, newColumn) {
     return this.update(id, { column: newColumn });
+  },
+
+  // Archive lead (soft delete by adding archived status)
+  async archive(id) {
+    await new Promise(resolve => setTimeout(resolve, 250));
+    const leads = getStoredLeads();
+    const leadIndex = leads.findIndex(lead => lead.Id === parseInt(id));
+    
+    if (leadIndex === -1) {
+      throw new Error('Lead not found');
+    }
+
+    leads[leadIndex] = {
+      ...leads[leadIndex],
+      archived: true,
+      archivedAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    
+    saveLeadsToStorage(leads);
+    return { ...leads[leadIndex] };
+  },
+
+  // Duplicate lead
+async duplicate(id) {
+    await new Promise(resolve => setTimeout(resolve, 300));
+    const leads = getStoredLeads();
+    const originalLead = leads.find(lead => lead.Id === parseInt(id));
+    
+    if (!originalLead) {
+      throw new Error('Lead not found');
+    }
+
+    const maxId = Math.max(...leads.map(l => l.Id), 0);
+    const duplicatedLead = {
+      ...originalLead,
+      Id: maxId + 1,
+      name: `${originalLead.name} (Copy)`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      archived: false
+    };
+
+    const updatedLeads = [...leads, duplicatedLead];
+    saveLeadsToStorage(updatedLeads);
+    return { ...duplicatedLead };
+  },
+
+  // Get all leads including archived (with filter option)
+async getAllIncludingArchived(includeArchived = false) {
+    await new Promise(resolve => setTimeout(resolve, 200));
+    const leads = getStoredLeads();
+    if (includeArchived) {
+      return [...leads];
+    }
+    return leads.filter(lead => !lead.archived);
   }
 };

@@ -8,6 +8,9 @@ const KanbanColumn = ({
   column,
   leads,
   onEditLead,
+  onArchiveLead,
+  onDeleteLead,
+  onDuplicateLead,
   onDragStart,
   onDragEnd,
   onDragOver,
@@ -41,10 +44,13 @@ const KanbanColumn = ({
       <div className="space-y-3">
         {columnLeads.length > 0 ? (
           columnLeads.map((lead) => (
-            <LeadCard
+<LeadCard
               key={lead.Id}
               lead={lead}
               onEdit={() => onEditLead(lead)}
+              onArchive={onArchiveLead}
+              onDelete={onDeleteLead}
+              onDuplicate={onDuplicateLead}
               onDragStart={(e) => onDragStart(e, lead)}
               onDragEnd={onDragEnd}
               isDragging={draggedItem?.Id === lead.Id}

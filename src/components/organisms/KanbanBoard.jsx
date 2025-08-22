@@ -98,22 +98,54 @@ const KanbanBoard = () => {
     }
   };
 
-  const onDrop = (e, columnTitle) => {
+const onDrop = (e, columnTitle) => {
     handleDrop(e, columnTitle, handleDropLead);
   };
 
+  const handleArchiveLead = async (lead) => {
+    try {
+      await leadService.archive(lead.Id);
+      await loadData();
+      toast.success(`${lead.name} has been archived`);
+    } catch (error) {
+      toast.error('Failed to archive lead');
+    }
+  };
+
+  const handleDeleteLead = async (lead) => {
+    try {
+      await leadService.delete(lead.Id);
+      await loadData();
+      toast.success(`${lead.name} has been deleted`);
+    } catch (error) {
+      toast.error('Failed to delete lead');
+    }
+  };
+
+  const handleDuplicateLead = async (lead) => {
+    try {
+      const duplicatedLead = await leadService.duplicate(lead.Id);
+      await loadData();
+      toast.success(`${lead.name} has been duplicated`);
+    } catch (error) {
+      toast.error('Failed to duplicate lead');
+    }
+  };
   if (loading) return <Loading />;
   if (error) return <Error error={error} onRetry={loadData} />;
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {columns.map((column) => (
+{columns.map((column) => (
           <KanbanColumn
             key={column.Id}
             column={column}
             leads={leads}
             onEditLead={handleEditLead}
+            onArchiveLead={handleArchiveLead}
+            onDeleteLead={handleDeleteLead}
+            onDuplicateLead={handleDuplicateLead}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onDragOver={handleDragOver}
