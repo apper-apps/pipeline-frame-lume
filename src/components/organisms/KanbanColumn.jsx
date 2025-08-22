@@ -58,16 +58,25 @@ className={cn(
               isDragging={draggedItem?.Id === lead.Id || draggedItem?.id === lead.id}
             />
           ))
-        ) : (
-          <div className="flex items-center justify-center h-40">
-            <div className="text-center p-6">
-              <div className="text-gray-300 mb-3">
-                <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
+) : (
+          <div className="flex items-center justify-center min-h-[280px]">
+            <div className="text-center p-8 max-w-sm">
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                <div className="text-gray-300">
+                  <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </div>
               </div>
-              <p className="text-base text-gray-500 font-medium mb-1">No leads yet</p>
-              <p className="text-sm text-gray-400">Drop leads here or add new ones</p>
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">No leads in {column.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed mb-4">
+                Start by adding new leads or drag existing ones here to organize your pipeline effectively.
+              </p>
+              <div className="flex items-center justify-center gap-2 text-xs text-gray-400">
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+                <span>Drag & Drop Ready</span>
+                <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+              </div>
             </div>
           </div>
         )}
