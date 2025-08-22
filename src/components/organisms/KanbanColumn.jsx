@@ -42,9 +42,9 @@ const KanbanColumn = ({
       />
 
       <div className="space-y-3">
-        {columnLeads.length > 0 ? (
+{columnLeads.length > 0 ? (
           columnLeads.map((lead) => (
-<LeadCard
+            <LeadCard
               key={lead.Id}
               lead={lead}
               onEdit={() => onEditLead(lead)}
