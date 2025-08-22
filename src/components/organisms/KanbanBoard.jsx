@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { format } from "date-fns";
 import { leadService } from "@/services/api/leadService";
 import { columnService } from "@/services/api/columnService";
 import { reminderService } from "@/services/api/reminderService";
 import { useDragAndDrop } from "@/hooks/useDragAndDrop";
-import FollowUpModal from "@/components/organisms/FollowUpModal";
-import KanbanColumn from "@/components/organisms/KanbanColumn";
-import LeadModal from "@/components/organisms/LeadModal";
-import Error from "@/components/ui/Error";
-import Loading from "@/components/ui/Loading";
 import AddLeadButton from "@/components/molecules/AddLeadButton";
 import FloatingActionButton from "@/components/molecules/FloatingActionButton";
+import LeadModal from "@/components/organisms/LeadModal";
+import KanbanColumn from "@/components/organisms/KanbanColumn";
+import FollowUpModal from "@/components/organisms/FollowUpModal";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
 const KanbanBoard = () => {
 const [leads, setLeads] = useState([]);
   const [columns, setColumns] = useState([]);
@@ -140,12 +141,19 @@ const handleFollowUpLead = (lead) => {
     setIsFollowUpModalOpen(true);
   };
 
-  const handleSaveFollowUp = async (reminderData) => {
+const handleSaveFollowUp = async (reminderData) => {
     try {
       await reminderService.create(reminderData);
-      toast.success(`Follow-up reminder set for ${reminderData.leadName}`, {
-        position: "top-right"
-      });
+      const reminderDate = new Date(reminderData.reminderDateTime);
+      const formattedDate = format(reminderDate, 'MMM dd, yyyy');
+      const formattedTime = format(reminderDate, 'hh:mm a');
+      
+      toast.success(
+        `Follow-up reminder set for ${reminderData.leadName} on ${formattedDate} at ${formattedTime}`, 
+        {
+          position: "top-right"
+        }
+      );
       setIsFollowUpModalOpen(false);
       setFollowUpLead(null);
     } catch (error) {
