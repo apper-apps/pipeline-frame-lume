@@ -6,11 +6,10 @@ import ApperIcon from "@/components/ApperIcon";
 import { cn } from "@/utils/cn";
 
 const LeadModal = ({ isOpen, onClose, onSave, lead = null, columns = [] }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    estimatedValue: "",
     date: "",
     column: "Cold Lead"
   });
@@ -18,13 +17,12 @@ const LeadModal = ({ isOpen, onClose, onSave, lead = null, columns = [] }) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
+useEffect(() => {
     if (lead) {
       setFormData({
         name: lead.name || "",
         email: lead.email || "",
         phone: lead.phone || "",
-        estimatedValue: lead.estimatedValue?.toString() || "",
         date: lead.date || "",
         column: lead.column || "Cold Lead"
       });
@@ -33,7 +31,6 @@ const LeadModal = ({ isOpen, onClose, onSave, lead = null, columns = [] }) => {
         name: "",
         email: "",
         phone: "",
-        estimatedValue: "",
         date: new Date().toISOString().split("T")[0],
         column: "Cold Lead"
       });
@@ -74,11 +71,6 @@ const LeadModal = ({ isOpen, onClose, onSave, lead = null, columns = [] }) => {
       newErrors.phone = "Phone is required";
     }
     
-    if (!formData.estimatedValue) {
-      newErrors.estimatedValue = "Estimated value is required";
-    } else if (isNaN(formData.estimatedValue) || parseFloat(formData.estimatedValue) <= 0) {
-      newErrors.estimatedValue = "Must be a positive number";
-    }
     
     if (!formData.date) {
       newErrors.date = "Date is required";
@@ -96,9 +88,8 @@ const LeadModal = ({ isOpen, onClose, onSave, lead = null, columns = [] }) => {
     setIsSubmitting(true);
     
     try {
-      const leadData = {
-        ...formData,
-        estimatedValue: parseFloat(formData.estimatedValue)
+const leadData = {
+        ...formData
       };
       
       await onSave(leadData);
@@ -189,19 +180,6 @@ const LeadModal = ({ isOpen, onClose, onSave, lead = null, columns = [] }) => {
                 placeholder="Enter phone number"
               />
 
-              <FormField
-                label="Estimated Value"
-                id="estimatedValue"
-                name="estimatedValue"
-                type="number"
-                min="0"
-                step="0.01"
-                value={formData.estimatedValue}
-                onChange={handleInputChange}
-                error={errors.estimatedValue}
-                required
-                placeholder="Enter estimated value"
-              />
 
               <FormField
                 label="Date"
