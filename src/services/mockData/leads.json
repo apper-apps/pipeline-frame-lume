@@ -1,0 +1,68 @@
+[
+  {
+    "Id": 1,
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@techcorp.com",
+    "phone": "(555) 123-4567",
+    "estimatedValue": 15000,
+    "date": "2024-01-15",
+    "column": "Cold Lead",
+    "createdAt": "2024-01-10T10:30:00Z",
+    "updatedAt": "2024-01-15T14:22:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Michael Chen",
+    "email": "m.chen@innovateplus.com",
+    "phone": "(555) 234-5678",
+    "estimatedValue": 25000,
+    "date": "2024-01-18",
+    "column": "Hot Lead",
+    "createdAt": "2024-01-12T09:15:00Z",
+    "updatedAt": "2024-01-18T11:45:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Emily Rodriguez",
+    "email": "emily.r@creativesolutions.net",
+    "phone": "(555) 345-6789",
+    "estimatedValue": 8500,
+    "date": "2024-01-20",
+    "column": "Estimate Sent",
+    "createdAt": "2024-01-14T16:20:00Z",
+    "updatedAt": "2024-01-20T13:30:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "David Thompson",
+    "email": "david.thompson@globalventures.com",
+    "phone": "(555) 456-7890",
+    "estimatedValue": 42000,
+    "date": "2024-01-22",
+    "column": "Closed",
+    "createdAt": "2024-01-08T12:00:00Z",
+    "updatedAt": "2024-01-22T16:45:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Lisa Williams",
+    "email": "l.williams@marketpro.org",
+    "phone": "(555) 567-8901",
+    "estimatedValue": 12000,
+    "date": "2024-01-16",
+    "column": "Cold Lead",
+    "createdAt": "2024-01-16T08:30:00Z",
+    "updatedAt": "2024-01-16T08:30:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "James Anderson",
+    "email": "j.anderson@dynamictech.com",
+    "phone": "(555) 678-9012",
+    "estimatedValue": 18500,
+    "date": "2024-01-19",
+    "column": "Hot Lead",
+    "createdAt": "2024-01-17T14:45:00Z",
+    "updatedAt": "2024-01-19T10:15:00Z"
+  }
+]
