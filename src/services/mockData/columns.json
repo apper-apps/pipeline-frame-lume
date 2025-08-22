@@ -1,24 +1,24 @@
 [
   {
-    "Id": 1,
+    "id": 1,
     "title": "Cold Lead",
     "order": 1,
     "color": "#64748b"
   },
   {
-    "Id": 2,
+    "id": 2,
     "title": "Hot Lead",
     "order": 2,
     "color": "#f59e0b"
   },
   {
-    "Id": 3,
+    "id": 3,
     "title": "Estimate Sent",
     "order": 3,
     "color": "#3b82f6"
   },
   {
-    "Id": 4,
+    "id": 4,
     "title": "Closed",
     "order": 4,
     "color": "#10b981"
