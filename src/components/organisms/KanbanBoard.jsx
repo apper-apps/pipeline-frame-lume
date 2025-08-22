@@ -164,51 +164,7 @@ const handleSaveFollowUp = async (reminderData) => {
     }
   };
 
-  const handleClearData = async () => {
-    const confirmed = window.confirm(
-      'Are you sure you want to clear all leads? This action cannot be undone.'
-    );
-    
-    if (!confirmed) return;
 
-    try {
-      setLoading(true);
-      await leadService.clearAll();
-      setLeads([]);
-toast.success('All leads have been cleared successfully');
-      
-      // Dispatch custom event to update dashboard stats
-      window.dispatchEvent(new window.CustomEvent('leadsUpdated'));
-    } catch (error) {
-      toast.error('Failed to clear leads');
-      console.error('Error clearing data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleResetToSample = async () => {
-    const confirmed = window.confirm(
-      'Are you sure you want to reset to sample data? This will replace all current leads.'
-    );
-    
-    if (!confirmed) return;
-
-    try {
-      setLoading(true);
-      const sampleData = await leadService.resetToSampleData();
-      setLeads(sampleData);
-toast.success('Data has been reset to sample leads');
-      
-      // Dispatch custom event to update dashboard stats
-      window.dispatchEvent(new window.CustomEvent('leadsUpdated'));
-    } catch (error) {
-      toast.error('Failed to reset to sample data');
-      console.error('Error resetting data:', error);
-    } finally {
-      setLoading(false);
-    }
-};
 
   if (loading) return <Loading />;
   if (error) return <Error message={error} onRetry={loadData} />;
@@ -219,20 +175,6 @@ toast.success('Data has been reset to sample leads');
       <div className="flex flex-wrap items-center justify-between gap-4">
         <AddLeadButton onClick={handleAddLead} />
         
-        <div className="flex gap-2">
-          <button
-            onClick={handleClearData}
-            className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-          >
-            Clear All Data
-          </button>
-          <button
-            onClick={handleResetToSample}
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-          >
-            Reset to Sample
-          </button>
-        </div>
       </div>
 {/* Kanban Board */}
       <div className="w-full overflow-x-auto">

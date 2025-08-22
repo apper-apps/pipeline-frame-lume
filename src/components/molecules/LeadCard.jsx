@@ -154,7 +154,7 @@ return (
         {/* Header Row */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1">
-            <h3 className="font-semibold text-gray-900 text-lg mb-1">{lead.name}</h3>
+<h3 className="font-semibold text-gray-900 text-lg mb-1 break-words">{lead.name}</h3>
           </div>
           
           {/* Actions */}
@@ -210,11 +210,11 @@ return (
         <div className="flex items-center gap-4 mb-3 text-sm text-gray-600">
           <div className="flex items-center gap-2">
             <ApperIcon name="Mail" size={14} />
-            <span>{lead.email}</span>
+<span className="break-words whitespace-pre-wrap">{lead.email}</span>
           </div>
           <div className="flex items-center gap-2">
             <ApperIcon name="Phone" size={14} />
-            <span>{lead.phone}</span>
+<span className="break-words whitespace-pre-wrap">{lead.phone}</span>
           </div>
         </div>
 
