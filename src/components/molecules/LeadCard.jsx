@@ -149,12 +149,12 @@ return (
         />
       )}
 
-      {/* Main Content */}
+{/* Main Content */}
       <div className="p-4">
         {/* Header Row */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1">
-<h3 className="font-semibold text-gray-900 text-lg mb-1 break-words">{lead.name}</h3>
+            <h3 className="font-semibold text-gray-900 text-lg mb-1 break-words">{lead.name}</h3>
           </div>
           
           {/* Actions */}
@@ -206,28 +206,31 @@ return (
           </div>
         </div>
 
-        {/* Contact Row */}
-        <div className="flex items-center gap-4 mb-3 text-sm text-gray-600">
-          <div className="flex items-center gap-2">
-            <ApperIcon name="Mail" size={14} />
-<span className="break-words whitespace-pre-wrap">{lead.email}</span>
+        {/* Text Content Frame */}
+        <div className="border border-gray-100 rounded-lg p-3 bg-gray-50/50">
+          {/* Contact Row */}
+          <div className="flex items-center gap-4 mb-3 text-sm text-gray-600">
+            <div className="flex items-center gap-2">
+              <ApperIcon name="Mail" size={14} />
+              <span className="break-words whitespace-pre-wrap">{lead.email}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ApperIcon name="Phone" size={14} />
+              <span className="break-words whitespace-pre-wrap">{lead.phone}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <ApperIcon name="Phone" size={14} />
-<span className="break-words whitespace-pre-wrap">{lead.phone}</span>
-          </div>
-        </div>
 
-        {/* Value and Date Row */}
-        <div className="flex items-center justify-between text-sm">
-          <div>
-            <span className="text-gray-500">Value: </span>
-            <span className="font-semibold text-green-600">
-              {formatCurrency(lead.estimatedValue)}
-            </span>
-          </div>
-          <div className="text-gray-500">
-            {formatDate(lead.date)}
+          {/* Value and Date Row */}
+          <div className="flex items-center justify-between text-sm">
+            <div>
+              <span className="text-gray-500">Value: </span>
+              <span className="font-semibold text-green-600">
+                {formatCurrency(lead.estimatedValue)}
+              </span>
+            </div>
+            <div className="text-gray-500">
+              {formatDate(lead.date)}
+            </div>
           </div>
         </div>
       </div>

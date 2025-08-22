@@ -41,9 +41,8 @@ className={cn(
         count={columnLeads.length}
         color={column.color}
       />
-
-<div className="space-y-4">
-{columnLeads.length > 0 ? (
+<div className="space-y-2">
+        {columnLeads.length > 0 ? (
           columnLeads.map((lead) => (
             <LeadCard
               key={lead.Id || lead.id || `lead-${Math.random()}`}
