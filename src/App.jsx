@@ -1,13 +1,34 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import CRMDashboard from "@/components/pages/CRMDashboard";
+import LoginPage from "@/components/pages/LoginPage";
 
-function App() {
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  return children;
+};
+
+function AppContent() {
   return (
     <div className="min-h-screen w-full">
       <Routes>
-        <Route path="/" element={<CRMDashboard />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route 
+          path="/" 
+          element={
+            <ProtectedRoute>
+              <CRMDashboard />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
       
       <ToastContainer
@@ -24,6 +45,14 @@ function App() {
         style={{ zIndex: 9999 }}
       />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { leadService } from "@/services/api/leadService";
-import KanbanBoard from "@/components/organisms/KanbanBoard";
-import FollowUpDashboard from "@/components/pages/FollowUpDashboard";
-import Header from "@/components/organisms/Header";
-import Button from "@/components/atoms/Button";
+import { useAuth } from "@/contexts/AuthContext";
 import ApperIcon from "@/components/ApperIcon";
+import FollowUpDashboard from "@/components/pages/FollowUpDashboard";
+import KanbanBoard from "@/components/organisms/KanbanBoard";
+import Header from "@/components/organisms/Header";
 import Error from "@/components/ui/Error";
 import Loading from "@/components/ui/Loading";
-
+import Button from "@/components/atoms/Button";
+import LogoutButton from "@/components/molecules/LogoutButton";
 const CRMDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -52,7 +53,7 @@ if (error) return <Error error={error} onRetry={loadStats} />;
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 md:p-6">
       <div className="max-w-full mx-auto">
-        <div className="flex items-center justify-between mb-8">
+<div className="flex items-center justify-between mb-8">
           <Header />
           <div className="flex items-center gap-3">
             <Button
@@ -69,6 +70,7 @@ if (error) return <Error error={error} onRetry={loadStats} />;
               <ApperIcon name="Clock" size={16} className="mr-2" />
               Follow-ups
             </Button>
+            <LogoutButton />
           </div>
         </div>
         
